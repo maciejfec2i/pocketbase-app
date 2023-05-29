@@ -19,7 +19,7 @@ export default function Book({ book }) {
         <p className="card-title">{bookTitle}</p>
         <p className="card-subtitle flex-container centre-horizontal flex-end-align">by {bookAuthor}</p>
       </div>
-      <Modal show={show} setShow={setShow} book={book} modalTitle={<BookModalTitle book={book} />} modalBody={<BookModalContent book={book} />} />
+      <Modal show={show} setShow={setShow} modalTitle={<BookModalTitle book={book} />} modalBody={<BookModalContent book={book} />} />
     </>
     
   )
