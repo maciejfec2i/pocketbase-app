@@ -4,7 +4,7 @@ export default function Modal(props) {
     <div className="modal flex-container centre" onClick={() => props.setShow(false)}>
         <div className="modal-content" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
-                <p className="modal-title">{props.modalTitle}</p>
+                <p className="modal-title text-not-selectable">{props.modalTitle}</p>
             </div>
             <div className="modal-body flex-container">
                 {props.modalBody}
