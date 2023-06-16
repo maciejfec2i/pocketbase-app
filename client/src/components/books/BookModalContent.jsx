@@ -14,7 +14,7 @@ export default function BookModalContent(props) {
         <div className="book-cover-modal">
             <img className="book-cover" src={bookCoverSrc} alt={`book cover of ${bookTitle}`} />
         </div>
-        <div className="book-description-modal">
+        <div className="book-description-modal text-not-selectable">
             <p className="book-desc-content">{bookDescription}</p>
             <p className="book-desc-content"><b>Genre:</b> {genres}</p>
             <p className="book-desc-content"><b>Original Publish Date:</b> {publishDate}</p>
