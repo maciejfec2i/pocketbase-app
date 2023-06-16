@@ -6,15 +6,35 @@ pb.autoCancellation(false)
 
 async function getAll({collection, sortBy}) {
 
-    const collectionSort = selectSortBy(sortBy)
+    const sort = selectSortBy(sortBy)
 
-    const books = await pb.collection(collection)
+    const collectionItems = await pb.collection(collection)
     .getFullList({
-        sort: collectionSort
+        sort: sort
     })
-    return books
+
+    return collectionItems
+}
+
+async function getPaginated({collection, sortBy, page, itemsPerPage}) {
+
+    const sort = selectSortBy(sortBy)
+
+    const paginatedCollection = await pb.collection(collection)
+    .getList(page, itemsPerPage, {
+        sort: sort
+    })
+
+    return paginatedCollection.items
+}
+
+async function addData({collection, data}) {
+    return await pb.collection(collection).create(data)
 }
 
 export {
-    getAll
+    getAll,
+    getPaginated,
+    addData,
+    pb
 }
