@@ -1,3 +1,4 @@
+import { addData } from "./pb"
 
 function formatTitle(title) {
     const splitTitle = title.toLowerCase().includes(", the") || title.toLowerCase().includes(", a") ? title.split(",") : false 
@@ -28,8 +29,38 @@ function selectSortBy(sort) {
     }
 }
 
+function handleFormInputChange({e, formValues, setFormValues}) {
+    setFormValues({
+        ...formValues,
+        [e.target.name]: e.target.value
+    })
+}
+
+function addNewBook({e, formValues, setShow}) {
+    e.preventDefault()
+
+    const collection= "books"
+    const data = {
+        title: formValues.title,
+        author: formValues.author,
+        description: formValues.description,
+        genre: formValues.genre,
+        original_publish_date: formValues.publishDate,
+        publisher: formValues.publisher,
+        cover_image_src: formValues.coverImgSrc
+    }
+
+    console.log(data)
+
+    addData({collection, data})
+
+    setShow(false)
+}
+
 export {
     formatTitle,
     formatDate,
-    selectSortBy
+    selectSortBy,
+    handleFormInputChange,
+    addNewBook
 }
