@@ -14,7 +14,7 @@ export default function Book({ book }) {
 
   return (
     <>
-      <div className="card flex-container flex-wrap centre-text text-not-selectable" onClick={() => setShow(true)}>
+      <div className="card flex-container flex-wrap centre-text text-not-selectable" onClick={() => setShow(true)} tabIndex={0}>
         <img className="book-cover" src={`${bookCoverSrc}`} alt={`book cover of ${bookTitle}`} />
         <p className="card-title">{bookTitle}</p>
         <p className="card-subtitle flex-container centre-horizontal flex-end-align">by {bookAuthor}</p>
