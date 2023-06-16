@@ -1,11 +1,14 @@
 import NavbarItems from "./NavbarItems";
+import Modal from "../Modal";
+import { useState } from "react";
+import NewBookForm from "../NewBookForm";
 
 export default function Navbar(props) {
+
+  const [show, setShow] = useState(false)
+
   return (
     <div className="navbar flex-container centre-horizontal">
-        <ul className="navbar-items text-not-selectable flex-container centre-horizontal">
-            <NavbarItems tabs={props.tabs} />
-        </ul>
         <div className="sort-select-container flex-container">
             <select className="sort-select" defaultValue={"Most Relevant"} onChange={(e) => props.setSort(e.target.value)}>
                 <option vlaue="Most Relevant">Most Relevant</option>
@@ -16,7 +19,8 @@ export default function Navbar(props) {
                 <option value="Relase Date (Ascending)">Relase Date (Ascending)</option>
                 <option value="Relase Date (Descending)">Relase Date (Descending)</option>
             </select>
-            <button className="add-book-btn">Add Book</button>
+            <button className="add-book-btn" onClick={() => {setShow(true)}}>Add Book</button>
+            <Modal show={show} setShow={setShow} modalTitle={"Add New Book"} modalBody={<NewBookForm formValues={props.formValues} setFormValues={props.setFormValues} setShow={setShow} />} />
         </div>
     </div>
   )
