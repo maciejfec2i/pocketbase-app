@@ -2,21 +2,24 @@ import './App.css'
 import Body from './components/Body'
 import Header from './components/Header'
 import Navbar from './components/navbar/Navbar'
+import Footer from './components/Footer'
 import useGetBooks from "./hooks/useGetBooks"
-import useSelectedTab from './hooks/useSelectedTab'
+import useNewBookForm from './hooks/useNewBookForm'
 import useCurrentSort from './hooks/userCurrentSort'
 
 function App() {
 
-  const [tabs, setTabs] = useSelectedTab()
   const [sort, setSort] = useCurrentSort()
   const books = useGetBooks({sort})
+  const [formValues, setFormValues] = useNewBookForm()
+  console.log("hello there!")
 
   return (
     <div className='main-container'>
       <Header />
-      <Navbar tabs={tabs} setSort={setSort} />
+      <Navbar setSort={setSort} formValues={formValues} setFormValues={setFormValues} />
       <Body books={books} />
+      <Footer />
     </div>
   )
 }
