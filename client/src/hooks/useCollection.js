@@ -14,13 +14,14 @@ import { getAll, pb } from "../utils/pb";
  * @version 16/06/2023
  */
 export default function useCollection({ collection, sortBy, subscribeToCollection }) {
+    
     const [collectionItems, setCollectionItems] = useState([])
     let unsubscribe
 
     useEffect(() => {
         async function subscribe() {
             unsubscribe = await pb.collection(collection)
-            .subscribe("*", async({ action }) => {
+            .subscribe("*", async ({ action }) => {
                 if(action === "create" || action === "delete") {
                     const collectionItems = await getAll({ collection: collection, sortBy: sortBy })
                     setCollectionItems([...collectionItems])
