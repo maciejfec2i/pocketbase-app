@@ -4,7 +4,7 @@ import { selectSortBy } from "./utilities"
 const pb = new PocketBase("http://127.0.0.1:8090")
 pb.autoCancellation(false)
 
-async function getAll({collection, sortBy}) {
+async function getAll({ collection, sortBy }) {
 
     const sort = selectSortBy(sortBy)
 
@@ -16,7 +16,7 @@ async function getAll({collection, sortBy}) {
     return collectionItems
 }
 
-async function getPaginated({collection, sortBy, page, itemsPerPage}) {
+async function getPaginated({ collection, sortBy, page, itemsPerPage }) {
 
     const sort = selectSortBy(sortBy)
 
@@ -25,10 +25,12 @@ async function getPaginated({collection, sortBy, page, itemsPerPage}) {
         sort: sort
     })
 
-    return paginatedCollection.items
+    const totalPages = Math.ceil(paginatedCollection.totalItems / itemsPerPage)
+
+    return { items: paginatedCollection.items, totalPages: totalPages }
 }
 
-async function addData({collection, data}) {
+async function addData({ collection, data }) {
     return await pb.collection(collection).create(data)
 }
 
