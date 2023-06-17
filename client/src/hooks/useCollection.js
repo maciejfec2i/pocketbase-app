@@ -8,7 +8,7 @@ import { getAll, pb } from "../utils/pb";
  * @param   {string}  options.collection              Name of the collection to get records from
  * @param   {string}  options.sortBy                  Record field the collection is to be sorted by (Optional)
  * @param   {boolean} options.subscribeToCollection   A flag specifying whether the collection is to be subscribed to for real time updates (Optional)
- * @returns A list of records from a specified collection
+ * @returns                                           A list of records from a specified collection
  * 
  * @author Maciej Fec
  * @version 16/06/2023
