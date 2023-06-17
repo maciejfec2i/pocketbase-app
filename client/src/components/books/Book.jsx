@@ -21,6 +21,5 @@ export default function Book({ book }) {
       </div>
       <Modal show={show} setShow={setShow} modalTitle={<BookModalTitle book={book} />} modalBody={<BookModalContent book={book} />} />
     </>
-    
   )
 }
