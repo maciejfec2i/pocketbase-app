@@ -29,14 +29,14 @@ function selectSortBy(sort) {
     }
 }
 
-function handleFormInputChange({e, formValues, setFormValues}) {
+function handleFormInputChange({ e, formValues, setFormValues }) {
     setFormValues({
         ...formValues,
         [e.target.name]: e.target.value
     })
 }
 
-function addNewBook({e, formValues, setShow}) {
+function addNewBook({ e, formValues, setShow }) {
     e.preventDefault()
 
     const collection= "books"
@@ -50,11 +50,12 @@ function addNewBook({e, formValues, setShow}) {
         cover_image_src: formValues.coverImgSrc
     }
 
-    console.log(data)
-
     addData({collection, data})
-
     setShow(false)
+}
+
+function changePage({ currentPage, setCurrentPage, direction }) {
+    direction === "next" ? setCurrentPage(currentPage + 1) : setCurrentPage(currentPage - 1)
 }
 
 export {
@@ -62,5 +63,6 @@ export {
     formatDate,
     selectSortBy,
     handleFormInputChange,
-    addNewBook
+    addNewBook,
+    changePage
 }
