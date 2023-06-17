@@ -18,12 +18,22 @@ body {
   background: #dddddd;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  flex-grow: 1;
+}
+
 .flex-container {
   display: flex;
 }
 
 .flex-wrap {
   flex-wrap: wrap;
+}
+
+.flex-direction-column {
+  flex-direction: column;
 }
 
 .centre-horizontal {
@@ -138,23 +148,22 @@ body {
   margin-bottom: 1rem;
 }
 
-.add-book-btn {
-  margin-left: 1rem;
-  font-size: 1rem;
+.btn-main-dark {
   padding: 0.5rem 1rem;
-  color: #eeeeee;
-  background: none;
-  border: 2px solid #334455;
+  border: 2px solid transparent;
   border-radius: 2rem;
-  margin: 0.5rem 1rem;
+  background-color: transparent;
+  color: #eeeeee;
+  font-size: 1rem;
 }
 
-.add-book-btn:hover {
+.btn-main-dark:hover {
   cursor: pointer;
   border: 2px solid #eeeeee;
+
 }
 
-.add-book-btn:focus {
+.btn-main-dark:focus {
   outline: none;
   border: 2px solid #eeeeee;
 }
@@ -163,6 +172,7 @@ body {
   padding: 1rem;
   color: #eeeeee;
   background: #222222;
+  width: 100%;
 }
 
 .logo {
@@ -180,36 +190,21 @@ body {
   width: 100%;
   color: #eeeeee;
   background: #334455;
-}
-
-.navbar-items {
-  margin-right: 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .navbar-item {
-  padding: 1rem;
-  font-size: 1.4rem;
-  list-style-type: none;
-  margin-right: 0.5rem;
-}
-
-.navbar-item:hover {
-  cursor: pointer;
-}
-
-.sort-select-container {
-  justify-content: end;
-  align-items: center;
+  margin: 0 0.5rem;
 }
 
 .sort-select {
   padding: 0.5rem 1rem;
   border-radius: 2rem;
   font-size: 1rem;
-  border: 2px solid #334455;
+  border: 2px solid transparent;
   outline: none;
   color: #eeeeee;
-  background: #334455;
+  background: transparent;
 }
 
 .sort-select:focus {
@@ -223,15 +218,14 @@ body {
 }
 
 .content {
-  width: 100%;
   padding: 1rem 2rem;
-  flex-wrap: wrap;
+  justify-items: center;
 }
 
 .card {
-  width: 15%;
-  padding: 1rem;
+  width: 85%;
   margin: 1rem;
+  padding: 1rem;
   background: #aaaaaa;
   border-radius: 1rem;
   box-shadow: 0 0 0.7rem #555555;
@@ -321,4 +315,18 @@ textarea {
 .form-submit-btn:focus {
   outline: none;
   border: 2px solid #eeeeee;
+}
+
+.footer {
+  width: 100%;
+  padding: 0.5rem;
+  background: #334455;
+  color: #eeeeee;
+  margin-top: auto;
+}
+
+.pages {
+  margin: 0 0.5rem;
+  padding: 0.5rem;
+  font-size: 1rem;
 }
