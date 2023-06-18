@@ -22,12 +22,11 @@ async function getPaginated({ collection, sortBy, page, itemsPerPage }) {
 
     const paginatedCollection = await pb.collection(collection)
     .getList(page, itemsPerPage, {
-        sort: sort
+            sort: sort
     })
-
     const totalPages = Math.ceil(paginatedCollection.totalItems / itemsPerPage)
 
-    return { items: paginatedCollection.items, totalPages: totalPages }
+    return { items: paginatedCollection.items, totalPages: totalPages }   
 }
 
 async function addData({ collection, data }) {

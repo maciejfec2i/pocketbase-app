@@ -54,8 +54,15 @@ function addNewBook({ e, formValues, setShow }) {
     setShow(false)
 }
 
-function changePage({ currentPage, setCurrentPage, direction }) {
-    direction === "next" ? setCurrentPage(currentPage + 1) : setCurrentPage(currentPage - 1)
+function changePage({ setCurrentPage, currentPageRef, direction }) {
+    if(direction === "next") {
+        currentPageRef.current += 1
+        setCurrentPage(currentPageRef.current)
+    }
+    if(direction === "prev") {
+        currentPageRef.current -= 1
+        setCurrentPage(currentPageRef.current)
+    }
 }
 
 export {

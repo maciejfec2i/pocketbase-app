@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getPaginated, pb } from "../utils/pb";
 
-export default function usePaginatedCollection({ collection, sortBy, subscribeToCollection, page, itemsPerPage }) {
+export default function usePaginatedCollection({ collection, sortBy, subscribeToCollection, itemsPerPage }) {
 
     const [collectionItems, setCollectionItems] = useState([])
     const [totalPages, setTotalPages] = useState(1)
+    const currentPageRef = useRef(1)
+    const [currentPage, setCurrentPage] = useState(currentPageRef.current)
     let unsubscribe
 
     useEffect(() => {
@@ -12,7 +14,12 @@ export default function usePaginatedCollection({ collection, sortBy, subscribeTo
             unsubscribe = await pb.collection(collection)
             .subscribe("*", async ({ action }) => {
                 if(action === "create" || action === "delete") {
+                    const page = currentPageRef.current
                     const collectionItems = await getPaginated({ collection, sortBy, page, itemsPerPage })
+                    if(page > collectionItems.totalPages) {
+                        currentPageRef.current = collectionItems.totalPages
+                        setCurrentPage(currentPageRef.current)
+                    }
                     setCollectionItems([...collectionItems.items])
                     setTotalPages(collectionItems.totalPages)
                 }
@@ -20,6 +27,7 @@ export default function usePaginatedCollection({ collection, sortBy, subscribeTo
         }
 
         async function getCollectionItems() {
+            const page = currentPageRef.current
             const collectionItems = await getPaginated({ collection, sortBy, page, itemsPerPage })
             setCollectionItems([...collectionItems.items])
             setTotalPages(collectionItems.totalPages)
@@ -29,9 +37,11 @@ export default function usePaginatedCollection({ collection, sortBy, subscribeTo
 
         if(subscribeToCollection) {
             subscribe()
-            return () => unsubscribe?.()
+            return () => {
+                unsubscribe?.()
+            }
         }
-    }, [sortBy, page])
+    }, [sortBy, currentPage])
 
-    return [collectionItems, totalPages]
+    return [collectionItems, totalPages, currentPage, setCurrentPage, currentPageRef]
 }
