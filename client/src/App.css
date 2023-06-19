@@ -207,6 +207,10 @@ body {
   background: transparent;
 }
 
+.sort-select-option {
+  background-color: #334455;
+}
+
 .sort-select:focus {
   outline: none;
   border: 2px solid #eeeeee;
