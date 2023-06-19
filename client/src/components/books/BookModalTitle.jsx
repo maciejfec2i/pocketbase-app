@@ -1,9 +1,10 @@
-import { formatTitle } from "../../utils/utilities"
+import { formatAuthorName, formatTitle } from "../../utils/utilities"
+import { titleCase } from "title-case";
 
 export default function BookModalTitle(props) {
 
-  const bookTitle = formatTitle(props.book.title)
-  const bookAuthor = props.book.author
+  const bookTitle = titleCase(formatTitle(props.book.title))
+  const bookAuthor = titleCase(formatAuthorName(props.book.author))
 
   return (
     <>
