@@ -24,7 +24,8 @@ async function getPaginated({ collection, sortBy, page, itemsPerPage }) {
     .getList(page, itemsPerPage, {
             sort: sort
     })
-    const totalPages = Math.ceil(paginatedCollection.totalItems / itemsPerPage)
+    let totalPages = Math.ceil(paginatedCollection.totalItems / itemsPerPage)
+    totalPages = totalPages === 0 ? totalPages += 1 : totalPages
 
     return { items: paginatedCollection.items, totalPages: totalPages }   
 }
