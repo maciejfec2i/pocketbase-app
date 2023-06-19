@@ -1,13 +1,14 @@
 import { formatDate, formatTitle } from "../../utils/utilities";
+import { titleCase } from "title-case";
 
 export default function BookModalContent(props) {
 
   const bookCoverSrc = props.book.cover_image_src
-  const bookTitle = formatTitle(props.book.title)
-  const bookDescription = props.book.description
+  const bookTitle = titleCase(formatTitle(props.book.title));
+  const bookDescription = props.book.description;
   const publishDate = formatDate(props.book.original_publish_date)
-  const publisher = props.book.publisher
-  const genres = props.book.genre
+  const publisher = titleCase(props.book.publisher);
+  const genres = titleCase(props.book.genre);
 
   return (
     <>
