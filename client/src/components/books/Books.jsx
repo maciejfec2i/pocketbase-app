@@ -1,8 +1,8 @@
 import Book from "./Book"
 
-export default function Books({ books }) {
+export default function Books(props) {
   return (
-    books.map(book => {
+    props.books.map(book => {
         return <Book book={book} key={crypto.randomUUID()} />
     })
   )

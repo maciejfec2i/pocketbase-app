@@ -5,13 +5,13 @@ import Modal from "../Modal";
 import BookModalContent from "./BookModalContent";
 import BookModalTitle from "./BookModalTitle";
 
-export default function Book({ book }) {
+export default function Book(props) {
 
   const [show, setShow] = useState(false)
 
-  const bookCoverSrc = book.cover_image_src
-  const bookTitle = titleCase(formatTitle(book.title))
-  const bookAuthor = titleCase(formatAuthorName(book.author))
+  const bookCoverSrc = props.book.cover_image_src
+  const bookTitle = titleCase(formatTitle(props.book.title))
+  const bookAuthor = titleCase(formatAuthorName(props.book.author))
 
   return (
     <>
@@ -20,7 +20,7 @@ export default function Book({ book }) {
         <p className="card-title">{bookTitle}</p>
         <p className="card-subtitle flex-container centre-horizontal flex-end-align">by {bookAuthor}</p>
       </div>
-      <Modal show={show} setShow={setShow} modalTitle={<BookModalTitle book={book} />} modalBody={<BookModalContent book={book} />} />
+      <Modal show={show} setShow={setShow} modalTitle={<BookModalTitle book={props.book} />} modalBody={<BookModalContent book={props.book} />} />
     </>
   )
 }

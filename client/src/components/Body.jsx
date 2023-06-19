@@ -1,9 +1,9 @@
 import Books from "./books/Books"
 
-export default function Body({ books }) {
+export default function Body(props) {
   return (
     <div className="content grid-container">
-        <Books books={books} />
+        <Books books={props.books} />
     </div>
   )
 }
