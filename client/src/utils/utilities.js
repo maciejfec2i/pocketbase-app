@@ -5,6 +5,11 @@ function formatTitle(title) {
     return !splitTitle ? title : `${splitTitle[1].replace(" ", "")} ${splitTitle[0]}` 
 }
 
+function formatAuthorName(authorName) {
+    const splitName = authorName.split(", ")
+    return `${splitName[1]} ${splitName[0]}`
+}
+
 function formatDate(date) {
     const parsedDate = new Date(date)
     return parsedDate.toLocaleDateString("en-UK")
@@ -39,14 +44,23 @@ function handleFormInputChange({ e, formValues, setFormValues }) {
 function addNewBook({ e, formValues, setShow }) {
     e.preventDefault()
 
+    const splitTitle = formValues.title.split(" ")
+    if(splitTitle[0].toLowerCase() === "the" || splitTitle[0].toLowerCase() === "a") {
+        splitTitle[0] = `, ${splitTitle[0]}`
+        formValues.title = splitTitle.slice(1).join(" ") + splitTitle[0]
+    }
+
+    const splitAuthor = formValues.author.split(" ")
+    formValues.author = `${splitAuthor[splitAuthor.length - 1]}, ${splitAuthor.splice(0, splitAuthor.indexOf(splitAuthor[splitAuthor.length - 1]))}`
+
     const collection= "books"
     const data = {
-        title: formValues.title,
-        author: formValues.author,
+        title: formValues.title.toLowerCase(),
+        author: formValues.author.toLowerCase(),
         description: formValues.description,
-        genre: formValues.genre,
+        genre: formValues.genre.toLowerCase(),
         original_publish_date: formValues.publishDate,
-        publisher: formValues.publisher,
+        publisher: formValues.publisher.toLowerCase(),
         cover_image_src: formValues.coverImgSrc
     }
 
@@ -67,6 +81,7 @@ function changePage({ setCurrentPage, currentPageRef, direction }) {
 
 export {
     formatTitle,
+    formatAuthorName,
     formatDate,
     selectSortBy,
     handleFormInputChange,
