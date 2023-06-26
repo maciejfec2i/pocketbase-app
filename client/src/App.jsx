@@ -1,12 +1,12 @@
 import './App.css'
+import Home from './components/Home'
+import Login from './components/Login'
 import useNewBookForm from './hooks/useNewBookForm'
 import useCurrentSort from './hooks/userCurrentSort'
 import usePaginatedCollection from './hooks/usePaginatedCollection'
 import { BOOK_COLLECTION } from './utils/collections'
 import { useState } from 'react'
-import Home from './components/Home'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from './components/Login'
 
 function App() {
 
@@ -23,7 +23,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home setSort={setSort} formValues={formValues} setFormValues={setFormValues} loggedIn={loggedIn} setLoggedIn={setLoggedIn} books={books} currentPage={currentPage} totalPages={totalPages} currentPageRef={currentPageRef} />} />
+        <Route path="/" element={<Home setSort={setSort} formValues={formValues} setFormValues={setFormValues} loggedIn={loggedIn} setLoggedIn={setLoggedIn} books={books} currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} currentPageRef={currentPageRef} />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
