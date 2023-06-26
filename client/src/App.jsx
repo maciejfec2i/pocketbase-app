@@ -1,12 +1,12 @@
 import './App.css'
-import Body from './components/Body'
-import Header from './components/Header'
-import Navbar from './components/navbar/Navbar'
-import Footer from './components/Footer'
 import useNewBookForm from './hooks/useNewBookForm'
 import useCurrentSort from './hooks/userCurrentSort'
 import usePaginatedCollection from './hooks/usePaginatedCollection'
 import { BOOK_COLLECTION } from './utils/collections'
+import { useState } from 'react'
+import Home from './components/Home'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from './components/Login'
 
 function App() {
 
@@ -18,14 +18,15 @@ function App() {
     itemsPerPage: 10
   })
   const [formValues, setFormValues] = useNewBookForm()
+  const [loggedIn, setLoggedIn] = useState(false)
 
   return (
-    <div className='main-container flex-container flex-direction-column'>
-      <Header />
-      <Navbar setSort={setSort} formValues={formValues} setFormValues={setFormValues} />
-      <Body books={books} />
-      <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} currentPageRef={currentPageRef} />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home setSort={setSort} formValues={formValues} setFormValues={setFormValues} loggedIn={loggedIn} setLoggedIn={setLoggedIn} books={books} currentPage={currentPage} totalPages={totalPages} currentPageRef={currentPageRef} />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
