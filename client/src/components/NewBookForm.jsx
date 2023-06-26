@@ -3,7 +3,7 @@ import { addNewBook, handleFormInputChange } from "../utils/utilities";
 export default function NewBookForm(props) {
   return (
     <>
-      <form className="new-book-form" onSubmit={e => addNewBook({e, formValues: props.formValues, setShow: props.setShow})}>
+      <form className="form" onSubmit={e => addNewBook({e, formValues: props.formValues, setShow: props.setShow})}>
         <label className="form-label" htmlFor="title">Title</label><br/>
         <input className="form-txt-input" type="text" id="title" name="title" onChange={e => handleFormInputChange({e, formValues: props.formValues, setFormValues: props.setFormValues})} /><br/>
         <label className="form-label" htmlFor="author">Author</label><br/>
