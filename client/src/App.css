@@ -269,7 +269,7 @@ body {
   width: 100%;
 }
 
-.new-book-form {
+.form {
   width: 100%;
 }
 
@@ -292,6 +292,10 @@ body {
 .form-txt-input:focus {
   outline: none;
   border: 2px solid #eeeeee;
+}
+
+.form-txt-input::placeholder {
+  color: #eeeeee;
 }
 
 textarea {
@@ -333,4 +337,15 @@ textarea {
   margin: 0 0.5rem;
   padding: 0.5rem;
   font-size: 1rem;
+}
+
+.login-page-inner {
+  width: 40%;
+  max-height: 90%;
+  padding: 1rem;
+  background-color: #aaaaaa;
+  color: #eeeeee;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem #444444;
+  overflow-y: auto;
 }
