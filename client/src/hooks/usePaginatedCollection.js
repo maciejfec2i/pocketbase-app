@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import { getPaginated, pb } from "../utils/pb";
+import { backendClient } from "../utils/pb";
+import { selectSortBy } from "../utils/utilities";
+import { actions } from "../utils/actions";
 
-export default function usePaginatedCollection({ collection, sortBy, subscribeToCollection, itemsPerPage }) {
+export default function usePaginatedCollection({ collectionName, sortBy, subscribeToCollection, itemsPerPage }) {
 
     const [collectionItems, setCollectionItems] = useState([])
     const [totalPages, setTotalPages] = useState(1)
@@ -11,26 +13,35 @@ export default function usePaginatedCollection({ collection, sortBy, subscribeTo
 
     useEffect(() => {
         async function subscribe() {
-            unsubscribe = await pb.collection(collection)
-            .subscribe("*", async ({ action }) => {
-                if(action === "create" || action === "delete") {
+            unsubscribe = await backendClient.inCollectionNamed(collectionName)
+            .listenForChanges("*", async ({ action }) => {
+                if(action === actions.CREATE || action === actions.DELETE) {
                     const page = currentPageRef.current
-                    const collectionItems = await getPaginated({ collection, sortBy, page, itemsPerPage })
-                    if(page > collectionItems.totalPages) {
-                        currentPageRef.current = collectionItems.totalPages
-                        setCurrentPage(currentPageRef.current)
+                    const collection = await backendClient.fromCollectionNamed(collectionName)
+                        .fromPage(page)
+                        .withQueryParams({ sort: selectSortBy(sortBy) })
+                        .getRecords({ perPage: itemsPerPage })
+                        
+                    if(page > collection.totalPages) {
+                        currentPageRef.current = collection.totalPages
+                        setCurrentPage(collection.totalPages)
                     }
-                    setCollectionItems([...collectionItems.items])
-                    setTotalPages(collectionItems.totalPages)
+                        
+                    setCollectionItems([...collection.items])
+                    setTotalPages(collection.totalPages)
                 }
             })
         }
 
         async function getCollectionItems() {
             const page = currentPageRef.current
-            const collectionItems = await getPaginated({ collection, sortBy, page, itemsPerPage })
-            setCollectionItems([...collectionItems.items])
-            setTotalPages(collectionItems.totalPages)
+            const collection = await backendClient.fromCollectionNamed(collectionName)
+                .fromPage(page)
+                .withQueryParams({ sort: selectSortBy(sortBy) })
+                .getRecords({ perPage: itemsPerPage })
+
+            setCollectionItems([...collection.items])
+            setTotalPages(collection.totalPages)
         }
 
         getCollectionItems()
