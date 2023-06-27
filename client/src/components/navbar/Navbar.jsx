@@ -1,4 +1,3 @@
-import NavbarItems from "./NavbarItems";
 import Modal from "../Modal";
 import { useState } from "react";
 import NewBookForm from "../NewBookForm";
@@ -18,8 +17,12 @@ export default function Navbar(props) {
         <option className="sort-select-option" value="Relase Date (Ascending)">Relase Date (Ascending)</option>
         <option className="sort-select-option" value="Relase Date (Descending)">Relase Date (Descending)</option>
       </select>
-      <button id="add-book-btn" className="btn-main-dark navbar-item" onClick={() => {setShow(true)}}>Add Book</button>
-      <button id="logout-btn" className="btn-main-dark navbar-item">Logout</button>
+      {props.loggedIn &&
+        <button id="add-book-btn" className="btn-main-dark navbar-item" onClick={() => {setShow(true)}}>Add Book</button>
+      }
+      {props.loggedIn &&
+        <button id="add-book-btn" className="btn-main-dark navbar-item" onClick={() => {setShow(true)}}>Add Book</button>
+      }
       <Modal show={show} setShow={setShow} modalTitle={"Add New Book"} modalBody={<NewBookForm formValues={props.formValues} setFormValues={props.setFormValues} setShow={setShow} />} />
     </div>
   )
