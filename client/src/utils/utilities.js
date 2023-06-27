@@ -1,4 +1,4 @@
-import { addData } from "./pb"
+import { backendClient } from "./pb"
 
 function formatTitle(title) {
     const splitTitle = title.toLowerCase().includes(", the") || title.toLowerCase().includes(", a") ? title.split(",") : false 
@@ -54,7 +54,7 @@ function addNewBook({ e, formValues, setShow }) {
     formValues.author = `${splitAuthor[splitAuthor.length - 1]}, ${splitAuthor.splice(0, splitAuthor.indexOf(splitAuthor[splitAuthor.length - 1]))}`
 
     const collection= "books"
-    const data = {
+    const record = {
         title: formValues.title.toLowerCase(),
         author: formValues.author.toLowerCase(),
         description: formValues.description,
@@ -64,7 +64,7 @@ function addNewBook({ e, formValues, setShow }) {
         cover_image_src: formValues.coverImgSrc
     }
 
-    addData({collection, data})
+    backendClient.inCollectionNamed(collection).createRecord(record)
     setShow(false)
 }
 
