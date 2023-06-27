@@ -12,7 +12,7 @@ function App() {
 
   const [sort, setSort] = useCurrentSort()
   const [books, totalPages, currentPage, setCurrentPage, currentPageRef] = usePaginatedCollection({ 
-    collection: BOOK_COLLECTION,
+    collectionName: BOOK_COLLECTION,
     sortBy: sort,
     subscribeToCollection: true,
     itemsPerPage: 10
@@ -24,7 +24,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home setSort={setSort} formValues={formValues} setFormValues={setFormValues} loggedIn={loggedIn} setLoggedIn={setLoggedIn} books={books} currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} currentPageRef={currentPageRef} />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
       </Routes>
     </BrowserRouter>
   )
