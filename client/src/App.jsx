@@ -1,12 +1,12 @@
 import './App.css'
 import Home from './components/Home'
 import Login from './components/Login'
-import useNewBookForm from './hooks/useNewBookForm'
 import useCurrentSort from './hooks/userCurrentSort'
 import usePaginatedCollection from './hooks/usePaginatedCollection'
 import { BOOK_COLLECTION } from './utils/collections'
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { authenticator } from './utils/pb'
 
 function App() {
 
@@ -17,13 +17,12 @@ function App() {
     subscribeToCollection: true,
     itemsPerPage: 10
   })
-  const [formValues, setFormValues] = useNewBookForm()
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(authenticator.authStoreIsValid())
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home setSort={setSort} formValues={formValues} setFormValues={setFormValues} loggedIn={loggedIn} setLoggedIn={setLoggedIn} books={books} currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} currentPageRef={currentPageRef} />} />
+        <Route path="/" element={<Home setSort={setSort} loggedIn={loggedIn} setLoggedIn={setLoggedIn} books={books} currentPage={currentPage} setCurrentPage={setCurrentPage} totalPages={totalPages} currentPageRef={currentPageRef} />} />
         <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
       </Routes>
     </BrowserRouter>
