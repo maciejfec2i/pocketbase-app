@@ -54,7 +54,7 @@ class PocketBaseClient extends PbRequestBuilder {
     }
 
     async createRecord(record) {
-        return await this.#pocketBaseInstance
+        return this.#pocketBaseInstance
             .collection(this._collectionName)
             .create(record)
     }

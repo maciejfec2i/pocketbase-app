@@ -1,5 +1,7 @@
 const BOOK_COLLECTION = "books"
+const AUTHOR_COLLECTION = "authors"
 
-export {
-    BOOK_COLLECTION
+export default {
+    BOOK_COLLECTION,
+    AUTHOR_COLLECTION
 }

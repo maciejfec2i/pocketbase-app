@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { formatAuthorName, formatTitle } from "../../utils/utilities";
+import { formatTitle } from "../../utils/utilities";
 import { titleCase } from "title-case";
 import Modal from "../Modal";
 import BookModalContent from "./BookModalContent";
@@ -11,7 +11,7 @@ export default function Book(props) {
 
   const bookCoverSrc = props.book.cover_image_src
   const bookTitle = titleCase(formatTitle(props.book.title))
-  const bookAuthor = titleCase(formatAuthorName(props.book.author))
+  const bookAuthor = titleCase(`${props.book.expand?.author?.forename} ${props.book.expand?.author?.surname}`)
 
   return (
     <>

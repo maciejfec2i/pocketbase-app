@@ -1,11 +1,13 @@
 import Modal from "../Modal";
 import { useState } from "react";
-import NewBookForm from "../NewBookForm";
+import NewBookForm from "../books/NewBookForm";
 import { authenticator } from "../../utils/pb";
+import NewAuthorForm from "../NewAuthorForm";
 
 export default function Navbar(props) {
 
-  const [show, setShow] = useState(false)
+  const [showAddBookModal, setShowAddBookModal] = useState(false)
+  const [showAddAuthorModal, setShowAddAuthorModal] = useState(false)
 
   return (
     <div className="navbar flex-container centre-horizontal">
@@ -20,8 +22,13 @@ export default function Navbar(props) {
       </select>
       {props.loggedIn &&
         <button id="add-book-btn" className="btn-main-dark navbar-item" onClick={
-          () => setShow(true)
+          () => setShowAddBookModal(true)
         }>Add Book</button>
+      }
+      {props.loggedIn &&
+        <button id="add-book-btn" className="btn-main-dark navbar-item" onClick={
+          () => setShowAddAuthorModal(true)
+        }>Add Author</button>
       }
       {props.loggedIn &&
         <button id="logout-btn" className="btn-main-dark navbar-item" onClick={
@@ -31,7 +38,8 @@ export default function Navbar(props) {
           }
         }>Logout</button>
       }
-      <Modal show={show} setShow={setShow} modalTitle={"Add New Book"} modalBody={<NewBookForm formValues={props.formValues} setFormValues={props.setFormValues} setShow={setShow} />} />
+      <Modal show={showAddBookModal} setShow={setShowAddBookModal} modalTitle={"Add New Book"} modalBody={<NewBookForm setShow={setShowAddBookModal} />} />
+      <Modal show={showAddAuthorModal} setShow={setShowAddAuthorModal} modalTitle={"Add Author"} modalBody={<NewAuthorForm setShow={setShowAddAuthorModal} />} />
     </div>
   )
 }

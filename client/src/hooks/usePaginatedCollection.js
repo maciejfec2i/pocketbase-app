@@ -9,6 +9,8 @@ export default function usePaginatedCollection({ collectionName, sortBy, subscri
     const [totalPages, setTotalPages] = useState(1)
     const currentPageRef = useRef(1)
     const [currentPage, setCurrentPage] = useState(currentPageRef.current)
+    const queryParams = { sort: selectSortBy(sortBy), expand: "author" }
+    
     let unsubscribe
 
     useEffect(() => {
@@ -19,7 +21,7 @@ export default function usePaginatedCollection({ collectionName, sortBy, subscri
                     const page = currentPageRef.current
                     const collection = await backendClient.fromCollectionNamed(collectionName)
                         .fromPage(page)
-                        .withQueryParams({ sort: selectSortBy(sortBy) })
+                        .withQueryParams(queryParams)
                         .getRecords({ perPage: itemsPerPage })
                         
                     if(page > collection.totalPages) {
@@ -37,7 +39,7 @@ export default function usePaginatedCollection({ collectionName, sortBy, subscri
             const page = currentPageRef.current
             const collection = await backendClient.fromCollectionNamed(collectionName)
                 .fromPage(page)
-                .withQueryParams({ sort: selectSortBy(sortBy) })
+                .withQueryParams(queryParams)
                 .getRecords({ perPage: itemsPerPage })
 
             setCollectionItems([...collection.items])
