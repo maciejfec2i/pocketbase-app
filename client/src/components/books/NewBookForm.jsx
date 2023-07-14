@@ -2,6 +2,8 @@ import collections from "../../utils/collections";
 import { backendClient } from "../../utils/pb";
 import { useState } from "react";
 import { formatTitleForDb } from "../../utils/utilities";
+import Authors from "../authors/Authors";
+import usePaginatedCollection from "../../hooks/usePaginatedCollection";
 
 export default function NewBookForm(props) {
 
@@ -13,6 +15,14 @@ export default function NewBookForm(props) {
     original_publish_date: "",
     publisher: "",
     cover_image_src: ""
+  })
+  const [selectedAuthor, setSelectedAuthor] = useState({ name: "", id: "" })
+  const [authors, setAuthors] = usePaginatedCollection({
+    collectionName: collections.AUTHOR_COLLECTION,
+    itemsPerPage: 20,
+    page: 1,
+    queryParams: {sort: "surname"},
+    subscribeToCollection: false
   })
 
   return (
@@ -29,6 +39,9 @@ export default function NewBookForm(props) {
         <input className="form-txt-input" type="text" id="title" name="title" onChange={(e) => setFormValues({...formValues, [e.target.name]: e.target.value.toLowerCase()})} /><br/>
         <label className="form-label" htmlFor="author">Author</label><br/>
         <input className="form-txt-input" type="text" id="author" name="author" onChange={e => setFormValues({...formValues, [e.target.name]: e.target.value.toLowerCase()})} /><br/>
+        <select name="authors" id="authors" className="form-txt-input" size={5}>
+          <Authors authors={authors} />
+        </select><br/>
         <label className="form-label" htmlFor="description">Description</label><br/>
         <textarea className="form-txt-input" id="description" name="description" cols="30" rows="10" onChange={e => setFormValues({...formValues, [e.target.name]: e.target.value})}></textarea><br/>
         <label className="form-label" htmlFor="genre">Genre</label><br/>

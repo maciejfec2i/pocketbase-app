@@ -11,12 +11,11 @@ export default function Footer(props) {
             () => changePage({ 
               currentPage: props.currentPage, 
               setCurrentPage: props.setCurrentPage, 
-              currentPageRef: props.currentPageRef,
               direction: "prev" 
             })
           }>Prev</button>
           
-          <p className="pages text-not-selectable">{props.currentPageRef.current} of {props.totalPages}</p>
+          <p className="pages text-not-selectable">{props.currentPage} of {props.totalPages}</p>
           
           <button className="btn-main-dark" 
           disabled={props.currentPage === props.totalPages ? true : false} 
@@ -24,7 +23,6 @@ export default function Footer(props) {
             () => changePage({ 
               currentPage: props.currentPage, 
               setCurrentPage: props.setCurrentPage,
-              currentPageRef: props.currentPageRef,
               direction: "next" 
             })
           }>Next</button>

@@ -49,11 +49,9 @@ function handleFormInputChange({ e, formValues, setFormValues }) {
     })
 }
 
-function changePage({ setCurrentPage, currentPageRef, direction }) {
-    if(direction === "next") currentPageRef.current += 1
-    if(direction === "prev") currentPageRef.current -= 1
-
-    setCurrentPage(currentPageRef.current)
+function changePage({ currentPage, setCurrentPage, direction }) {
+    if(direction === "next") setCurrentPage(currentPage + 1)
+    if(direction === "prev") setCurrentPage(currentPage - 1)
 }
 
 export {

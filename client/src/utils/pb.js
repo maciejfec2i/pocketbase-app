@@ -43,7 +43,10 @@ class PocketBaseClient extends PbRequestBuilder {
     }
 
     async getRecords({ perPage }) {
-        const paginatedCollection = await this.#pocketBaseInstance
+        console.log(this._pageNumber)
+
+        try {
+            const paginatedCollection = await this.#pocketBaseInstance
             .collection(this._collectionName)
             .getList(this._pageNumber, perPage, this._queryParams)
 
@@ -51,6 +54,8 @@ class PocketBaseClient extends PbRequestBuilder {
         totalPages = totalPages === 0 ? totalPages += 1 : totalPages
 
         return {items: paginatedCollection.items, totalPages: totalPages}
+        }
+        catch (err) {}
     }
 
     async createRecord(record) {
@@ -111,7 +116,7 @@ class PocketBaseClientAuthenticator {
 }
 
 const POCKET_BASE_INSTANCE = new PocketBase("http://127.0.0.1:8090")
-POCKET_BASE_INSTANCE.autoCancellation(false)
+// POCKET_BASE_INSTANCE.autoCancellation(false)
 
 const backendClient = new PocketBaseClient(POCKET_BASE_INSTANCE)
 const authenticator = new PocketBaseClientAuthenticator(POCKET_BASE_INSTANCE)
