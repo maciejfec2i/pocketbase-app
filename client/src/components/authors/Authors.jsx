@@ -5,7 +5,7 @@ export default function Authors(props) {
 
   return (
     props.authors.map(author => {
-      return <Author author={author} key={crypto.randomUUID()} />
+      return <Author key={crypto.randomUUID()} author={author} selectedAuthor={props.selectedAuthor} />
     })
   )
 }

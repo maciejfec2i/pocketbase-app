@@ -349,3 +349,32 @@ textarea {
   box-shadow: 0 0 1rem #444444;
   overflow-y: auto;
 }
+
+#authors {
+  overflow-y: auto;
+}
+
+#authors option {
+  padding: 0.25rem;
+  color: #eeeeee;
+}
+
+#author-name {
+  width: 50%;
+}
+
+#authors option:checked {
+  background: #555555 linear-gradient(0deg, #555555 0%, #555555 100%);
+}
+
+#authors::-webkit-scrollbar {
+  width: 0.2rem;
+}
+
+#authors::-webkit-scrollbar-track {
+  background: #eeeeee;
+}
+
+#authors::-webkit-scrollbar-thumb {
+  background: #555555;
+}

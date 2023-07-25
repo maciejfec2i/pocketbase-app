@@ -11,7 +11,7 @@ export default function Navbar(props) {
 
   return (
     <div className="navbar flex-container centre-horizontal">
-      <select className="sort-select navbar-item" defaultValue={"Most Relevant"} onChange={(e) => props.setSort(e.target.value)}>
+      <select className="sort-select navbar-item" defaultValue={"Most Relevant"} tabIndex={2} onChange={(e) => props.setSort(e.target.value)}>
         <option className="sort-select-option" vlaue="Most Relevant">Most Relevant</option>
         <option className="sort-select-option" value="Title (A-Z)">Title (A - Z)</option>
         <option className="sort-select-option" value="Title (Z-A)">Title (Z - A)</option>
@@ -21,17 +21,17 @@ export default function Navbar(props) {
         <option className="sort-select-option" value="Relase Date (Descending)">Relase Date (Descending)</option>
       </select>
       {props.loggedIn &&
-        <button id="add-book-btn" className="btn-main-dark navbar-item" onClick={
+        <button id="add-book-btn" className="btn-main-dark navbar-item" tabIndex={2} onClick={
           () => setShowAddBookModal(true)
         }>Add Book</button>
       }
       {props.loggedIn &&
-        <button id="add-book-btn" className="btn-main-dark navbar-item" onClick={
+        <button id="add-book-btn" className="btn-main-dark navbar-item" tabIndex={2} onClick={
           () => setShowAddAuthorModal(true)
         }>Add Author</button>
       }
       {props.loggedIn &&
-        <button id="logout-btn" className="btn-main-dark navbar-item" onClick={
+        <button id="logout-btn" className="btn-main-dark navbar-item" tabIndex={2} onClick={
           () => {
             authenticator.clearAuthStore()
             props.setLoggedIn(authenticator.authStoreIsValid())

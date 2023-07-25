@@ -22,13 +22,8 @@ export default function Home(props) {
   })
 
   useEffect(() => {
-    console.log(currentPage)
-    return () => console.log(currentPage)
-  }, [])
-
-  useEffect(() => {
     if(currentPage > totalPages) {
-        setCurrentPage(totalPages)
+      setCurrentPage(totalPages)
     }
   }, [totalPages])
 

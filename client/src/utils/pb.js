@@ -43,8 +43,6 @@ class PocketBaseClient extends PbRequestBuilder {
     }
 
     async getRecords({ perPage }) {
-        console.log(this._pageNumber)
-
         try {
             const paginatedCollection = await this.#pocketBaseInstance
             .collection(this._collectionName)
